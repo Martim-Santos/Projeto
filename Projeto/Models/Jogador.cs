@@ -11,9 +11,7 @@ namespace Projeto.Models {
             // inicializar a lista de itens do jogador
             ListaItens = new HashSet<Itens>();
             // inicializar a lista de Mensagens do jogador
-            ListaSent = new HashSet<Mensagem>();
-            // inicializar a lista de itens do jogador
-            ListaRecieved = new HashSet<Mensagem>();
+            ListaRecieved = new HashSet<MsgJogador>();
         }
 
         public int Id { get; set; }
@@ -71,12 +69,7 @@ namespace Projeto.Models {
         /// <summary>
         /// Lista das Mensagens associados ao Jogador
         /// </summary>
-        public ICollection<Mensagem> ListaSent { get; set; }
-
-        /// <summary>
-        /// Lista das Mensagens associados ao Jogador
-        /// </summary>
-        public ICollection<Mensagem> ListaRecieved { get; set; }
+        public ICollection<MsgJogador> ListaRecieved { get; set; }
 
     }
 }

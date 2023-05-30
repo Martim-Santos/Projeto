@@ -13,5 +13,6 @@ namespace Projeto.Data {
         public DbSet<Itens> Itens { get; set; }
         public DbSet<Grupo> Grupo { get; set; }
         public DbSet<Mensagem> Mensagem { get; set; }
+        public DbSet<MsgJogador> MsgJogador { get; set; }
     }
 }

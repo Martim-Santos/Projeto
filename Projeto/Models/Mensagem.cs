@@ -1,37 +1,40 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace Projeto.Models {
     public class Mensagem {
         public Mensagem() {
-            // inicializar a lista de itens do jogador
-            ListaJogador = new HashSet<Jogador>();
+            // inicializar a lista de Mensagens do jogador
+            ListaRecieved = new HashSet<MsgJogador>();
         }
 
-        public int id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Conteudo da mensagem
         /// </summary>
-        public string frase { get; set; }
+        public string Frase { get; set; }
 
         /// <summary>
         /// data de envio da mensagem
         /// </summary>
-        public DateTime data { get; set; }
+        public DateTime Data { get; set; }
 
-
-
+        
         [ForeignKey(nameof(Jogador))]
         public int JogadorFK { get; set; }
         public Jogador Jogador { get; set; }
+
 
         [ForeignKey(nameof(Grupo))]
         public int GrupoFK { get; set; }
         public Grupo Grupo { get; set; }
 
         /// <summary>
-        /// Lista dos Itens associados ao Jogador
+        /// Lista das Mensagens associados ao Jogador
         /// </summary>
-        public ICollection<Jogador> ListaJogador { get; set; }
+        public ICollection<MsgJogador> ListaRecieved { get; set; }
     }
 }

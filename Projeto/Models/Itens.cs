@@ -25,7 +25,7 @@
         /// <summary>
         /// tipo de item
         /// </summary>
-        public int custo { get; set; }
+        public int Custo { get; set; }
 
         /// <summary>
         /// Lista dos Itens associados ao Jogador

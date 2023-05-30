@@ -3,27 +3,39 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto.Data;
 
 #nullable disable
 
-namespace Projeto.Data.Migrations
+namespace Projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230523161238_Models")]
-    partial class Models
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ItensJogador", b =>
+                {
+                    b.Property<int>("ListaItensId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ListaJogadorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ListaItensId", "ListaJogadorId");
+
+                    b.HasIndex("ListaJogadorId");
+
+                    b.ToTable("ItensJogador");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -227,6 +239,162 @@ namespace Projeto.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Projeto.Models.Grupo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Grupo");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Itens", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Custo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Imagem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Itens");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Jogador", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("GrupoFK")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("click")
+                        .HasColumnType("int");
+
+                    b.Property<int>("score")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GrupoFK");
+
+                    b.ToTable("Jogador");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Mensagem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Frase")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GrupoFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("JogadorFK")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GrupoFK");
+
+                    b.HasIndex("JogadorFK");
+
+                    b.ToTable("Mensagem");
+                });
+
+            modelBuilder.Entity("Projeto.Models.MsgJogador", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("JogadorFK")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MensagemFK")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("JogadorFK");
+
+                    b.HasIndex("MensagemFK");
+
+                    b.ToTable("MsgJogador");
+                });
+
+            modelBuilder.Entity("ItensJogador", b =>
+                {
+                    b.HasOne("Projeto.Models.Itens", null)
+                        .WithMany()
+                        .HasForeignKey("ListaItensId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projeto.Models.Jogador", null)
+                        .WithMany()
+                        .HasForeignKey("ListaJogadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -276,6 +444,70 @@ namespace Projeto.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Projeto.Models.Jogador", b =>
+                {
+                    b.HasOne("Projeto.Models.Grupo", "Grupo")
+                        .WithMany("ListaJogador")
+                        .HasForeignKey("GrupoFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grupo");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Mensagem", b =>
+                {
+                    b.HasOne("Projeto.Models.Grupo", "Grupo")
+                        .WithMany()
+                        .HasForeignKey("GrupoFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projeto.Models.Jogador", "Jogador")
+                        .WithMany()
+                        .HasForeignKey("JogadorFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Grupo");
+
+                    b.Navigation("Jogador");
+                });
+
+            modelBuilder.Entity("Projeto.Models.MsgJogador", b =>
+                {
+                    b.HasOne("Projeto.Models.Jogador", "Jogador")
+                        .WithMany("ListaRecieved")
+                        .HasForeignKey("JogadorFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projeto.Models.Mensagem", "Mensagem")
+                        .WithMany("ListaRecieved")
+                        .HasForeignKey("MensagemFK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Jogador");
+
+                    b.Navigation("Mensagem");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Grupo", b =>
+                {
+                    b.Navigation("ListaJogador");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Jogador", b =>
+                {
+                    b.Navigation("ListaRecieved");
+                });
+
+            modelBuilder.Entity("Projeto.Models.Mensagem", b =>
+                {
+                    b.Navigation("ListaRecieved");
                 });
 #pragma warning restore 612, 618
         }
