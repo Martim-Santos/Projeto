@@ -42,7 +42,7 @@ namespace Projeto.Controllers {
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password")] Jogador Jogador) {
+        public async Task<IActionResult> Create([Bind("UserName,Email,Password")] Jogador Jogador) {
             if (ModelState.IsValid) {
                 _context.Add(Jogador);
                 await _context.SaveChangesAsync();
