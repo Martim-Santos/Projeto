@@ -24,13 +24,13 @@ namespace Projeto.Models {
 
         
         [ForeignKey(nameof(Jogador))]
-        public int JogadorFK { get; set; }
-        public Jogador Jogador { get; set; }
+        public string? JogadorFK { get; set; }
+        public Jogador? Jogador { get; set; }
 
 
         [ForeignKey(nameof(Grupo))]
-        public int GrupoFK { get; set; }
-        public Grupo Grupo { get; set; }
+        public int? GrupoFK { get; set; }
+        public Grupo? Grupo { get; set; }
 
         /// <summary>
         /// Lista das Mensagens associados ao Jogador

@@ -22,19 +22,19 @@ namespace Projeto.Controllers
         // GET: Jogadors
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Jogador.Include(j => j.Grupo);
+            var applicationDbContext = _context.Users.Include(j => j.Grupo);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Jogadors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Jogador == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var jogador = await _context.Jogador
+            var jogador = await _context.Users
                 .Include(j => j.Grupo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (jogador == null)
@@ -57,7 +57,7 @@ namespace Projeto.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,Email,Password,click,score,GrupoFK")] Jogador jogador)
+        public async Task<IActionResult> Create([Bind("UserName,Email,PasswordHash,GrupoFK")] Jogador jogador)
         {
             if (ModelState.IsValid)
             {
@@ -72,12 +72,12 @@ namespace Projeto.Controllers
         // GET: Jogadors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Jogador == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var jogador = await _context.Jogador.FindAsync(id);
+            var jogador = await _context.Users.FindAsync(id);
             if (jogador == null)
             {
                 return NotFound();
@@ -91,7 +91,7 @@ namespace Projeto.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserName,Email,Password,click,score,GrupoFK")] Jogador jogador)
+        public async Task<IActionResult> Edit(int id, [Bind("UserName,Email,PasswordHash,GrupoFK")] Jogador jogador)
         {
             if (id != jogador.Id)
             {
@@ -125,12 +125,12 @@ namespace Projeto.Controllers
         // GET: Jogadors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Jogador == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var jogador = await _context.Jogador
+            var jogador = await _context.Users
                 .Include(j => j.Grupo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (jogador == null)
@@ -146,14 +146,14 @@ namespace Projeto.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Jogador == null)
+            if (_context.Users == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Jogador'  is null.");
             }
-            var jogador = await _context.Jogador.FindAsync(id);
+            var jogador = await _context.Users.FindAsync(id);
             if (jogador != null)
             {
-                _context.Jogador.Remove(jogador);
+                _context.Users.Remove(jogador);
             }
             
             await _context.SaveChangesAsync();
@@ -162,7 +162,7 @@ namespace Projeto.Controllers
 
         private bool JogadorExists(int id)
         {
-          return (_context.Jogador?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Projeto.Models {
-    public class Jogador {
+    public class Jogador : IdentityUser {
 
         /// <summary>
         /// Descrição dos jogadores
@@ -12,32 +13,11 @@ namespace Projeto.Models {
             ListaItens = new HashSet<Itens>();
             // inicializar a lista de Mensagens do jogador
             ListaRecieved = new HashSet<MsgJogador>();
+            this.click = 1;
+            this.score = 0;
         }
 
         public int Id { get; set; }
-
-        /// <summary>
-        /// Nome do jogador
-        /// </summary>
-        [Required(ErrorMessage = "O {0} é de preenchismento obrigratório.")]
-        [StringLength(20)]
-        public string UserName { get; set; }
-
-        /// <summary>
-        /// email do jogador
-        /// </summary>
-        [EmailAddress]
-        [Required(ErrorMessage = "O {0} é de preenchismento obrigratório.")]
-        [StringLength(50)]
-        public string Email { get; set; }
-
-        /// <summary>
-        /// password do jogador
-        /// </summary>
-        [Required(ErrorMessage = "A {0} é de preenchismento obrigratório.")]
-        [StringLength(20, MinimumLength = 8,
-                      ErrorMessage = "A {0} tem de ter no mínimo {2} characteres")]
-        public string Password { get; set; }
 
         /// <summary>
         /// score do criador
@@ -58,8 +38,9 @@ namespace Projeto.Models {
         /// FK para o Grupo do Jogador
         /// </summary>
         [ForeignKey(nameof(Grupo))]
+        [Display(Name = "Grupo")]
         public int GrupoFK { get; set; }
-        public Grupo Grupo { get; set; }
+        public Grupo? Grupo { get; set; }
 
         /// <summary>
         /// Lista dos Itens associados ao Jogador
