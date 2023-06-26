@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using System.Transactions;
 
 namespace Projeto.Models {
     public class Jogador : IdentityUser {
@@ -13,21 +14,21 @@ namespace Projeto.Models {
             ListaItens = new HashSet<Itens>();
             // inicializar a lista de Mensagens do jogador
             ListaRecieved = new HashSet<MsgJogador>();
-            this.click = 1;
-            this.score = 0;
+            this.Click = 1;
+            this.Score = 0;
         }
 
-        public int Id { get; set; }
+
 
         /// <summary>
         /// score do criador
         /// </summary>
-        public int click { get; set; }
+        public int Click { get; set; }
 
         /// <summary>
         /// score do criador
         /// </summary>
-        public int score { get; set; }
+        public int Score { get; set; }
 
 
         /*+++++++++++++++++++++++++++++++++++++++++++
