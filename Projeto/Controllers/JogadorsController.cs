@@ -104,7 +104,7 @@ namespace Projeto.Controllers
                 {
                     _context.Update(jogador);
                     _context.SaveChanges();
-                    //await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
