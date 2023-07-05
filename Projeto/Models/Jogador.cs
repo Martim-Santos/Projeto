@@ -18,7 +18,8 @@ namespace Projeto.Models {
             this.Score = 0;
         }
 
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id{ get; set; }
 
         /// <summary>
         /// score do criador

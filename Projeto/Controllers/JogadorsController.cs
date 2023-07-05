@@ -103,7 +103,6 @@ namespace Projeto.Controllers
                 try
                 {
                     _context.Update(jogador);
-                    _context.SaveChanges();
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -114,7 +113,7 @@ namespace Projeto.Controllers
                     }
                     else
                     {
-                        //throw;
+                        throw;
                     }
                 }
                 return RedirectToAction(nameof(Index));
