@@ -23,21 +23,21 @@ namespace Projeto.Data {
             builder.Entity<Itens>().HasData(
 
                 new {
-                    Id = 0, Name = "+1", Custo = 10, Description = "Mais 1 click por click :)", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item +1.png")
+                    Id = 1, Name = "+1", Custo = 10, Description = "Mais 1 click por click :)", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item +1.png")
                 }, new {
-                    Id = 1, Name = "+69", Custo = 690, Description = "Boa", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item +69.png")
+                    Id = 2, Name = "+69", Custo = 690, Description = "Boa", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item +69.png")
                 }, new {
-                    Id = 2, Name = "x5", Custo = 5000, Description = "MULTIPLOS CLICKS", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item x5.png")
+                    Id = 3, Name = "x5", Custo = 5000, Description = "MULTIPLOS CLICKS", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item x5.png")
                 }, new {
-                    Id = 3, Name = "x100", Custo = 100000, Description = "tantos clicks", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item x100.png")
+                    Id = 4, Name = "x100", Custo = 100000, Description = "tantos clicks", Imagem = Path.Combine(nomeLocalizacaoImagem, "Item x100.png")
                 }, new {
-                    Id = 4, Name = "Não é um botão", Custo = 1001, Description = "Definitivamente não é um botão", Imagem = Path.Combine(nomeLocalizacaoImagem, "not a button.png")
+                    Id = 5, Name = "Não é um botão", Custo = 1001, Description = "Definitivamente não é um botão", Imagem = Path.Combine(nomeLocalizacaoImagem, "not a button.png")
                 }, new {
-                    Id = 5, Name = "Gorro de natal", Custo = 2512, Description = "HO HO HO", Imagem = Path.Combine(nomeLocalizacaoImagem, "christmas hat.png")
+                    Id = 6, Name = "Gorro de natal", Custo = 2512, Description = "HO HO HO", Imagem = Path.Combine(nomeLocalizacaoImagem, "christmas hat.png")
                 });
         }
 
-
+        
         public DbSet<Itens> Itens { get; set; }
         public DbSet<Grupo> Grupo { get; set; }
         public DbSet<Mensagem> Mensagem { get; set; }

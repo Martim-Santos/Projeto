@@ -1,0 +1,48 @@
+﻿@model Projeto.Models.Mensagem
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Mensagem</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Frase" class="control-label"></label>
+                <input asp-for="Frase" class="form-control" />
+                <span asp-validation-for="Frase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JogadorFK" class="control-label">Jogador</label>
+                <select asp-for="JogadorFK" class="form-control" asp-items="ViewBag.JogadorFK">
+                    <option value="0">-- Escolha um Jogador --</option>
+                </select>
+                <span asp-validation-for="JogadorFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GrupoFK" class="control-label">Grupo</label>
+                <select asp-for="GrupoFK" class="form-control" asp-items="ViewBag.GrupoFK">
+                    <option value="0">-- Escolha um Grupo --</option>
+                </select>
+                <span asp-validation-for="GrupoFK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Voltar para a lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
@@ -8,6 +9,7 @@ namespace Projeto.Models {
         public Mensagem() {
             // inicializar a lista de Mensagens do jogador
             ListaRecieved = new HashSet<MsgJogador>();
+            this.Data = DateTime.Now;
         }
 
         public int Id { get; set; }
@@ -15,6 +17,8 @@ namespace Projeto.Models {
         /// <summary>
         /// Conteudo da mensagem
         /// </summary>
+        [Required(ErrorMessage = "O {0} é de preenchismento obrigratório.")]
+        [StringLength(60)]
         public string Frase { get; set; }
 
         /// <summary>

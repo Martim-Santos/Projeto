@@ -1,4 +1,4 @@
-﻿@model Projeto.Models.Jogador
+﻿@model Projeto.Models.Mensagem
 
 @{
     ViewData["Title"] = "Delete";
@@ -6,28 +6,28 @@
 
 <h1>Apagar</h1>
 
-<h3>Tens certeza que queres apagar este jogador?</h3>
+<h3>Tens certesa que queres apagar esta mensagem?</h3>
 <div>
-    <h4>Jogador</h4>
+    <h4>Mensagem</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            Nome
+            @Html.DisplayNameFor(model => model.Frase)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.Frase)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Data)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
+            @Html.DisplayFor(model => model.Data)
         </dd>
         <dt class = "col-sm-2">
-            Password
+            @Html.DisplayNameFor(model => model.Jogador)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PasswordHash)
+            @Html.DisplayFor(model => model.Jogador.UserName)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Grupo)
@@ -40,6 +40,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Apagar" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar à lista</a>
+        <a asp-action="Index">Voltar para a lista</a>
     </form>
 </div>

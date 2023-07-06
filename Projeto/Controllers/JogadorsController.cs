@@ -48,7 +48,7 @@ namespace Projeto.Controllers
         // GET: Jogadors/Create
         public IActionResult Create()
         {
-            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Id");
+            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Projeto.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Id", jogador.GrupoFK);
+            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", jogador.GrupoFK);
             return View(jogador);
         }
 
@@ -82,7 +82,7 @@ namespace Projeto.Controllers
             {
                 return NotFound();
             }
-            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Id", jogador.GrupoFK);
+            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", jogador.GrupoFK);
             return View(jogador);
         }
 
@@ -91,7 +91,7 @@ namespace Projeto.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string Id, [Bind("Id,UserName,Email,PasswordHash,Click,Score,GrupoFK")] Jogador jogador)
+        public async Task<IActionResult> Edit(string Id, [Bind("Id,UserName,Email,PasswordHash,GrupoFK")] Jogador jogador)
         {
             if (Id != jogador.Id)
             {
@@ -113,12 +113,12 @@ namespace Projeto.Controllers
                     }
                     else
                     {
-                        throw;
+                        //throw;
                     }
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Id", jogador.GrupoFK);
+            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", jogador.GrupoFK);
             return View(jogador);
         }
 
