@@ -56,15 +56,10 @@ namespace Projeto.Controllers {
                 if (mensagem.JogadorFK == "0") {
                     ModelState.AddModelError("", "Tem de escolher para quem vai enviar.");
                 }
-                //mensagem.GrupoFK = 5;
-                if (ModelState.IsValid) {
-                    _context.Add(mensagem);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
+                mensagem.GrupoFK = null;
             }
-            if (mensagem.JogadorFK != "0") {
-                ModelState.AddModelError("", "Tem de escolher para quem vai enviar.");
+            if (mensagem.JogadorFK == "0") {
+                mensagem.JogadorFK = null;
             }
             if (ModelState.IsValid) {
                     _context.Add(mensagem);
