@@ -28,7 +28,7 @@ namespace Projeto.Models {
 
         
         [ForeignKey(nameof(Jogador))]
-        public string? JogadorFK { get; set; }
+        public int? JogadorFK { get; set; }
         public Jogador? Jogador { get; set; }
 
 

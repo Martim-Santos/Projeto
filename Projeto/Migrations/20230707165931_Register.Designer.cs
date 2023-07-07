@@ -12,15 +12,15 @@ using Projeto.Data;
 namespace Projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230606093546_mudar_user")]
-    partial class mudar_user
+    [Migration("20230707165931_Register")]
+    partial class Register
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -30,8 +30,8 @@ namespace Projeto.Migrations
                     b.Property<int>("ListaItensId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ListaJogadorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("ListaJogadorId")
+                        .HasColumnType("int");
 
                     b.HasKey("ListaItensId", "ListaJogadorId");
 
@@ -90,6 +90,71 @@ namespace Projeto.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -230,15 +295,15 @@ namespace Projeto.Migrations
                         {
                             Id = 1,
                             Custo = 10,
-                            Description = "Mais 1 click  por click :)",
-                            Imagem = "Item +1.png",
+                            Description = "Mais 1 click por click :)",
+                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +1.png",
                             Name = "+1"
                         },
                         new
                         {
                             Id = 2,
                             Custo = 690,
-                            Description = "Nice",
+                            Description = "Boa",
                             Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +69.png",
                             Name = "+69"
                         },
@@ -246,7 +311,7 @@ namespace Projeto.Migrations
                         {
                             Id = 3,
                             Custo = 5000,
-                            Description = "MULTICLICK",
+                            Description = "MULTIPLOS CLICKS",
                             Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x5.png",
                             Name = "x5"
                         },
@@ -254,7 +319,7 @@ namespace Projeto.Migrations
                         {
                             Id = 4,
                             Custo = 100000,
-                            Description = "So many clicks",
+                            Description = "tantos clicks",
                             Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x100.png",
                             Name = "x100"
                         },
@@ -262,9 +327,9 @@ namespace Projeto.Migrations
                         {
                             Id = 5,
                             Custo = 1001,
-                            Description = "Definitly not a Button",
+                            Description = "Definitivamente não é um botão",
                             Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\not a button.png",
-                            Name = "not a button"
+                            Name = "Não é um botão"
                         },
                         new
                         {
@@ -272,84 +337,46 @@ namespace Projeto.Migrations
                             Custo = 2512,
                             Description = "HO HO HO",
                             Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\christmas hat.png",
-                            Name = "Christmas Hat"
+                            Name = "Gorro de natal"
                         });
                 });
 
             modelBuilder.Entity("Projeto.Models.Jogador", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccessFailedCount")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Click")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("GrupoFK")
                         .HasColumnType("int");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("click")
+                    b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<int>("score")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("GrupoFK");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("Jogador");
                 });
 
             modelBuilder.Entity("Projeto.Models.Mensagem", b =>
@@ -365,13 +392,14 @@ namespace Projeto.Migrations
 
                     b.Property<string>("Frase")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<int?>("GrupoFK")
                         .HasColumnType("int");
 
-                    b.Property<string>("JogadorFK")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("JogadorFK")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -390,9 +418,8 @@ namespace Projeto.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("JogadorFK")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("JogadorFK")
+                        .HasColumnType("int");
 
                     b.Property<int>("MensagemFK")
                         .HasColumnType("int");
@@ -432,7 +459,7 @@ namespace Projeto.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Projeto.Models.Jogador", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -441,7 +468,7 @@ namespace Projeto.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Projeto.Models.Jogador", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -456,7 +483,7 @@ namespace Projeto.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Projeto.Models.Jogador", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -465,7 +492,7 @@ namespace Projeto.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Projeto.Models.Jogador", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -486,7 +513,7 @@ namespace Projeto.Migrations
             modelBuilder.Entity("Projeto.Models.Mensagem", b =>
                 {
                     b.HasOne("Projeto.Models.Grupo", "Grupo")
-                        .WithMany()
+                        .WithMany("ListaMensagem")
                         .HasForeignKey("GrupoFK");
 
                     b.HasOne("Projeto.Models.Jogador", "Jogador")
@@ -520,6 +547,8 @@ namespace Projeto.Migrations
             modelBuilder.Entity("Projeto.Models.Grupo", b =>
                 {
                     b.Navigation("ListaJogador");
+
+                    b.Navigation("ListaMensagem");
                 });
 
             modelBuilder.Entity("Projeto.Models.Jogador", b =>

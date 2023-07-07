@@ -6,7 +6,7 @@ namespace Projeto.Models {
         public int Id { get; set; }
 
         [ForeignKey(nameof(Jogador))]
-        public string JogadorFK { get; set; }
+        public int JogadorFK { get; set; }
         public Jogador Jogador { get; set; }
 
         [ForeignKey(nameof(Mensagem))]

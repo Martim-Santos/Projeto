@@ -53,12 +53,12 @@ namespace Projeto.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Frase,Data,JogadorFK,GrupoFK")] Mensagem mensagem) {
             if (mensagem.GrupoFK == 0) {
-                if (mensagem.JogadorFK == "0") {
+                if (mensagem.JogadorFK == 0) {
                     ModelState.AddModelError("", "Tem de escolher para quem vai enviar.");
                 }
                 mensagem.GrupoFK = null;
             }
-            if (mensagem.JogadorFK == "0") {
+            if (mensagem.JogadorFK == 0) {
                 mensagem.JogadorFK = null;
             }
             if (ModelState.IsValid) {

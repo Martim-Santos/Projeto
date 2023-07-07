@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Projeto.Models;
 
 namespace Projeto.Data {
-    public class ApplicationDbContext : IdentityDbContext<Jogador> {
+    public class ApplicationDbContext : IdentityDbContext {
 
         private readonly IWebHostEnvironment _webHostEnvironment;
         public ApplicationDbContext(
@@ -37,7 +36,7 @@ namespace Projeto.Data {
                 });
         }
 
-        
+        public DbSet<Jogador> Jogador { get; set; }
         public DbSet<Itens> Itens { get; set; }
         public DbSet<Grupo> Grupo { get; set; }
         public DbSet<Mensagem> Mensagem { get; set; }

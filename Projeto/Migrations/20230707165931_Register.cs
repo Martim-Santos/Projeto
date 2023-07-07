@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class mudar_user : Migration
+    public partial class Register : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,31 @@ namespace Projeto.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,40 +99,6 @@ namespace Projeto.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    click = table.Column<int>(type: "int", nullable: false),
-                    score = table.Column<int>(type: "int", nullable: false),
-                    GrupoFK = table.Column<int>(type: "int", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_Grupo_GrupoFK",
-                        column: x => x.GrupoFK,
-                        principalTable: "Grupo",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -198,25 +189,49 @@ namespace Projeto.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Jogador",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Click = table.Column<int>(type: "int", nullable: false),
+                    Score = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GrupoFK = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Jogador", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Jogador_Grupo_GrupoFK",
+                        column: x => x.GrupoFK,
+                        principalTable: "Grupo",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ItensJogador",
                 columns: table => new
                 {
                     ListaItensId = table.Column<int>(type: "int", nullable: false),
-                    ListaJogadorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ListaJogadorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItensJogador", x => new { x.ListaItensId, x.ListaJogadorId });
                     table.ForeignKey(
-                        name: "FK_ItensJogador_AspNetUsers_ListaJogadorId",
-                        column: x => x.ListaJogadorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_ItensJogador_Itens_ListaItensId",
                         column: x => x.ListaItensId,
                         principalTable: "Itens",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ItensJogador_Jogador_ListaJogadorId",
+                        column: x => x.ListaJogadorId,
+                        principalTable: "Jogador",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -227,23 +242,23 @@ namespace Projeto.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Frase = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Frase = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Data = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    JogadorFK = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    JogadorFK = table.Column<int>(type: "int", nullable: true),
                     GrupoFK = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Mensagem", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Mensagem_AspNetUsers_JogadorFK",
-                        column: x => x.JogadorFK,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_Mensagem_Grupo_GrupoFK",
                         column: x => x.GrupoFK,
                         principalTable: "Grupo",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Mensagem_Jogador_JogadorFK",
+                        column: x => x.JogadorFK,
+                        principalTable: "Jogador",
                         principalColumn: "Id");
                 });
 
@@ -253,16 +268,16 @@ namespace Projeto.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    JogadorFK = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    JogadorFK = table.Column<int>(type: "int", nullable: false),
                     MensagemFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MsgJogador", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MsgJogador_AspNetUsers_JogadorFK",
+                        name: "FK_MsgJogador_Jogador_JogadorFK",
                         column: x => x.JogadorFK,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Jogador",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -278,12 +293,12 @@ namespace Projeto.Migrations
                 columns: new[] { "Id", "Custo", "Description", "Imagem", "Name" },
                 values: new object[,]
                 {
-                    { 1, 10, "Mais 1 click  por click :)", "Item +1.png", "+1" },
-                    { 2, 690, "Nice", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +69.png", "+69" },
-                    { 3, 5000, "MULTICLICK", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x5.png", "x5" },
-                    { 4, 100000, "So many clicks", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x100.png", "x100" },
-                    { 5, 1001, "Definitly not a Button", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\not a button.png", "not a button" },
-                    { 6, 2512, "HO HO HO", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\christmas hat.png", "Christmas Hat" }
+                    { 1, 10, "Mais 1 click por click :)", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +1.png", "+1" },
+                    { 2, 690, "Boa", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +69.png", "+69" },
+                    { 3, 5000, "MULTIPLOS CLICKS", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x5.png", "x5" },
+                    { 4, 100000, "tantos clicks", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x100.png", "x100" },
+                    { 5, 1001, "Definitivamente não é um botão", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\not a button.png", "Não é um botão" },
+                    { 6, 2512, "HO HO HO", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\christmas hat.png", "Gorro de natal" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -319,11 +334,6 @@ namespace Projeto.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_GrupoFK",
-                table: "AspNetUsers",
-                column: "GrupoFK");
-
-            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -334,6 +344,11 @@ namespace Projeto.Migrations
                 name: "IX_ItensJogador_ListaJogadorId",
                 table: "ItensJogador",
                 column: "ListaJogadorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Jogador_GrupoFK",
+                table: "Jogador",
+                column: "GrupoFK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Mensagem_GrupoFK",
@@ -384,13 +399,16 @@ namespace Projeto.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
                 name: "Itens");
 
             migrationBuilder.DropTable(
                 name: "Mensagem");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Jogador");
 
             migrationBuilder.DropTable(
                 name: "Grupo");

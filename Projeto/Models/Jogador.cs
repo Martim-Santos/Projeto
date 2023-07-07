@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
-using System.Transactions;
 
 namespace Projeto.Models {
-    public class Jogador : IdentityUser {
+    public class Jogador {
 
         /// <summary>
         /// Descrição dos jogadores
@@ -18,17 +16,38 @@ namespace Projeto.Models {
             this.Score = 0;
         }
 
-        
+        public int Id { get; set; }
 
         /// <summary>
-        /// score do criador
+        /// nome do jogador
+        /// </summary>
+        [Required(ErrorMessage = "O {0} é de preenchismento obrigratório.")]
+        [StringLength(50)]
+        public string Nome { get; set; }
+
+        /// <summary>
+        /// Email do jogador
+        /// </summary>
+        [EmailAddress]
+        [Required(ErrorMessage = "O {0} é de preenchismento obrigratório.")]
+        [StringLength(50)]
+        public string Email { get; set; }
+
+        /// <summary>
+        /// cliques que o jogador faz ao clicar
         /// </summary>
         public int Click { get; set; }
 
         /// <summary>
-        /// score do criador
+        /// pontuação do jogador (quantas vezes o jogador clicou)
         /// </summary>
         public int Score { get; set; }
+
+        /// <summary>
+        /// chave de ligação entre a base de dados da autenticação
+        /// e a base de dados do 'jogo'
+        /// </summary>
+        public string UserId { get; set; }
 
 
         /*+++++++++++++++++++++++++++++++++++++++++++
