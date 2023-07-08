@@ -52,7 +52,7 @@ namespace Projeto.Controllers {
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserName,Email,PasswordHash,Click,Score,GrupoFK")] Jogador jogador)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Password,Click,Score,GrupoFK")] Jogador jogador)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Projeto.Controllers {
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,UserName,Email,PasswordHash,Click,Score,GrupoFK")] Jogador jogador)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,Nome,Email,Password,Click,Score,GrupoFK")] Jogador jogador)
         {
             if (Id != jogador.Id)
             {
