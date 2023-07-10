@@ -33,10 +33,6 @@ namespace Projeto.Models {
         [StringLength(50)]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        public string Password { get; set; }
-
         /// <summary>
         /// cliques que o jogador faz ao clicar
         /// </summary>
@@ -47,11 +43,15 @@ namespace Projeto.Models {
         /// </summary>
         public int Score { get; set; }
 
+
+        // *************************************************************
         /// <summary>
         /// chave de ligação entre a base de dados da autenticação
         /// e a base de dados do 'jogo'
         /// </summary>
         public string UserId { get; set; }
+
+        // *************************************************************
 
 
         /*+++++++++++++++++++++++++++++++++++++++++++
@@ -63,7 +63,7 @@ namespace Projeto.Models {
         /// </summary>
         [ForeignKey(nameof(Grupo))]
         [Display(Name = "Grupo")]
-        public int GrupoFK { get; set; }
+        public int? GrupoFK { get; set; }
         public Grupo? Grupo { get; set; }
 
         /// <summary>

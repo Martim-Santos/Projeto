@@ -41,7 +41,7 @@ namespace Projeto.Controllers {
         }
 
         // GET: Jogadors/Create
-        public IActionResult Create()
+        /*public IActionResult Create()
         {
             ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name");
             return View();
@@ -62,7 +62,7 @@ namespace Projeto.Controllers {
             }
             ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", jogador.GrupoFK);
             return View(jogador);
-        }
+        }*/
 
         // GET: Jogadors/Edit/5
         public async Task<IActionResult> Edit(int? Id)
@@ -86,7 +86,7 @@ namespace Projeto.Controllers {
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int Id, [Bind("Id,Nome,Email,Password,Click,Score,GrupoFK")] Jogador jogador)
+        public async Task<IActionResult> Edit(int Id, [Bind("Id,Nome,Email,Click,Score,GrupoFK")] Jogador jogador)
         {
             if (Id != jogador.Id)
             {

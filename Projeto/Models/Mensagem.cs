@@ -26,7 +26,8 @@ namespace Projeto.Models {
         /// </summary>
         public DateTime Data { get; set; }
 
-        
+        /********************  Chaves forasteiras  ************************/
+
         [ForeignKey(nameof(Jogador))]
         public int? JogadorFK { get; set; }
         public Jogador? Jogador { get; set; }

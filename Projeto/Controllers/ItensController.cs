@@ -11,23 +11,24 @@ namespace Projeto.Controllers {
     public class ItensController : ControllerBase {
 
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ItensController(ApplicationDbContext context, UserManager<IdentityUser> userManager) {
+        public ItensController(ApplicationDbContext context, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager) {
             _context = context;
-            this.userManager = userManager;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAsync(IdentityUser? j) {
-            _ = await userManager.FindByEmailAsync("email");
+        public async Task<IActionResult> GetAsync(IdentityUser j) {
+            _ = await _userManager.FindByEmailAsync("email");
 
             if (j != null) {
                 PasswordVerificationResult res = new PasswordHasher<IdentityUser>().VerifyHashedPassword(null, j.PasswordHash, "password");
                 if (res.Equals(PasswordVerificationResult.Success)) {
-                    await signInManager.SignInAsync(j, false);
+                    await _signInManager.SignInAsync(j, false);
                 }
             }
 

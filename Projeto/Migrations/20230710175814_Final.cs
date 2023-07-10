@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Projeto.Migrations
 {
     /// <inheritdoc />
-    public partial class Register : Migration
+    public partial class Final : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -199,7 +199,7 @@ namespace Projeto.Migrations
                     Click = table.Column<int>(type: "int", nullable: false),
                     Score = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GrupoFK = table.Column<int>(type: "int", nullable: false)
+                    GrupoFK = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -208,8 +208,7 @@ namespace Projeto.Migrations
                         name: "FK_Jogador_Grupo_GrupoFK",
                         column: x => x.GrupoFK,
                         principalTable: "Grupo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -286,6 +285,17 @@ namespace Projeto.Migrations
                         principalTable: "Mensagem",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Grupo",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Grupo Inicial", "Grupo Inicial" },
+                    { 2, "Grupo para pessoas fixes", "Bacanos" },
+                    { 3, "Definitivamente não é um grupo", "Não somos um grupo" },
+                    { 4, "Não temos nome", "Sem nome" }
                 });
 
             migrationBuilder.InsertData(

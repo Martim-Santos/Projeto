@@ -21,6 +21,7 @@ namespace Projeto.Data {
             nomeLocalizacaoImagem = Path.Combine(nomeLocalizacaoImagem, "imagens");
 
             base.OnModelCreating(builder);
+
             builder.Entity<Itens>().HasData(
 
                 new Itens{
@@ -40,17 +41,23 @@ namespace Projeto.Data {
             builder.Entity<Grupo>().HasData(
                 new Grupo{
                     Id = 1, Name = "Grupo Inicial", Description = "Grupo Inicial"
+                }, new Grupo {
+                    Id = 2, Name = "Bacanos", Description = "Grupo para pessoas fixes"
+                }, new Grupo {
+                    Id = 3, Name = "Não somos um grupo", Description = "Definitivamente não é um grupo"
+                }, new Grupo {
+                    Id = 4, Name = "Sem nome", Description = "Não temos nome"
                 });
 
-            builder.Entity<Jogador>().HasData(
+            /*builder.Entity<Jogador>().HasData(
             new Jogador{
-                    Id = 1, Nome = "anonimo", Email = "martim-santos@hotmail.com", Password = "anonimo", Click = 1, Score = 0, UserId = "aleatorio"
+                    Id = 1, Nome = "anonimo", Email = "martim-santos@hotmail.com", Click = 1, Score = 0
             });
 
             builder.Entity<IdentityUser>().HasData(
             new IdentityUser {
                 Id = "1", UserName = "anonimo", Email = "martim-santos@hotmail.com", PasswordHash = "anonimo"
-            });
+            });*/
         }
 
         public DbSet<Jogador> Jogador { get; set; }

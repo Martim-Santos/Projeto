@@ -12,8 +12,8 @@ using Projeto.Data;
 namespace Projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230707165931_Register")]
-    partial class Register
+    [Migration("20230710175814_Final")]
+    partial class Final
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -261,6 +261,32 @@ namespace Projeto.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grupo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Grupo Inicial",
+                            Name = "Grupo Inicial"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Grupo para pessoas fixes",
+                            Name = "Bacanos"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Definitivamente não é um grupo",
+                            Name = "Não somos um grupo"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Não temos nome",
+                            Name = "Sem nome"
+                        });
                 });
 
             modelBuilder.Entity("Projeto.Models.Itens", b =>
@@ -357,7 +383,7 @@ namespace Projeto.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("GrupoFK")
+                    b.Property<int?>("GrupoFK")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -503,9 +529,7 @@ namespace Projeto.Migrations
                 {
                     b.HasOne("Projeto.Models.Grupo", "Grupo")
                         .WithMany("ListaJogador")
-                        .HasForeignKey("GrupoFK")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GrupoFK");
 
                     b.Navigation("Grupo");
                 });

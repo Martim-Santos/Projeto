@@ -109,33 +109,46 @@ namespace Projeto.Areas.Identity.Pages.Account
             /// dados do jogador a serem recolhidos no Registo
             /// </summary>
             public Jogador Jogador { get; set; }
-        }
 
+        } //fim da classe inputmodel
 
+        /// <summary>
+        /// método que reage a uma invocação em get do html
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+
+        /// <summary>
+        /// mátodo que reage com o post
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
 
 
             //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-            
 
+
+            // avalia se os dados do inputmodel, que vêm da view, estão validos
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                
-                
+
+                // criação do utilizador
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
+                // se houve successo na criação do USER
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
