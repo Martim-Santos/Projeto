@@ -303,12 +303,12 @@ namespace Projeto.Migrations
                 columns: new[] { "Id", "Custo", "Description", "Imagem", "Name" },
                 values: new object[,]
                 {
-                    { 1, 10, "Mais 1 click por click :)", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +1.png", "+1" },
-                    { 2, 690, "Boa", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +69.png", "+69" },
-                    { 3, 5000, "MULTIPLOS CLICKS", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x5.png", "x5" },
-                    { 4, 100000, "tantos clicks", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x100.png", "x100" },
-                    { 5, 1001, "Definitivamente não é um botão", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\not a button.png", "Não é um botão" },
-                    { 6, 2512, "HO HO HO", "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\christmas hat.png", "Gorro de natal" }
+                    { 1, 10, "Mais 1 click por click :)", "item1.png", "+1" },
+                    { 2, 690, "Boa", "item69.png", "+69" },
+                    { 3, 5000, "MULTIPLOS CLICKS", "itemx5.png", "x5" },
+                    { 4, 100000, "tantos clicks", "itemx100.png", "x100" },
+                    { 5, 1001, "Definitivamente não é um botão", "not_a_button.png", "Não é um botão" },
+                    { 6, 2512, "HO HO HO", "christmas_hat.png", "Gorro de natal" }
                 });
 
             migrationBuilder.CreateIndex(

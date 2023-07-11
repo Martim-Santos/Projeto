@@ -31,7 +31,30 @@ namespace Projeto.Controllers {
             return Ok(Jogadores);
         }
 
-        
+        // devolve o Grupo com esse Id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Jogador>> Get(int id) {
+
+            var user = await _context.Jogador.FindAsync(id);
+
+            if (user == null) return BadRequest("Jogador not found :(");
+
+            return Ok(await _context.Jogador.FindAsync(id));
+        }
+
+        // devolve a lista de itens do jogador
+        [HttpGet("itens/{id}")]
+        public async Task<ActionResult<List<Itens>>> GetUserItens(int Id) {
+
+            var user = await _context.Jogador.FindAsync(Id);
+
+            if (user == null) return BadRequest("user not found :(");
+
+            var item = user.ListaItens;
+
+            return Ok(item);
+        }
+
 
     }
 

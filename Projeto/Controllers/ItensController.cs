@@ -54,18 +54,7 @@ namespace Projeto.Controllers {
             return Ok(await _context.Itens.ToListAsync());
         }
 
-        // devolve a lista de itens do jogador
-        [HttpGet("User/{id}")]
-        public async Task<ActionResult<List<Itens>>> GetUserItens(int Id) {
-
-            var user = await _context.Jogador.FindAsync(Id);
-
-            if (user == null) return BadRequest("user not found :(");
-
-            var item = user.ListaItens;
-
-            return Ok(item);
-        }
+        
 
     }
 

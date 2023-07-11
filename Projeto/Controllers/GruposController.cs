@@ -13,13 +13,9 @@ namespace Projeto.Controllers {
     public class GruposController : ControllerBase {
 
         private readonly ApplicationDbContext _context;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
 
-        public GruposController(ApplicationDbContext context, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager) {
+        public GruposController(ApplicationDbContext context) {
             _context = context;
-            _signInManager = signInManager;
-            _userManager = userManager;
         }
 
         // devolve a lista de Grupos
@@ -31,7 +27,31 @@ namespace Projeto.Controllers {
             return Ok(Group);
         }
 
-        
+        // devolve o Grupo com esse Id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Grupo>> Get(int id) {
+
+            var item = await _context.Grupo.FindAsync(id);
+
+            if (item == null) return BadRequest("Grupo not found :(");
+
+            return Ok(await _context.Grupo.FindAsync(id));
+        }
+
+        // devolve a lista de jogadores do Grupo
+        [HttpGet("User/{id}")]
+        public async Task<ActionResult<List<Grupo>>> GetUserItens(int Id) {
+
+            var Group = await _context.Grupo.FindAsync(Id);
+
+            if (Group == null) return BadRequest("Grupo not found :(");
+
+            var lista = Group.ListaJogador;
+
+            return Ok(lista);
+        }
+
+
 
     }
 

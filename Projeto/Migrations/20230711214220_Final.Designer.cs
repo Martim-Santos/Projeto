@@ -12,7 +12,7 @@ using Projeto.Data;
 namespace Projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230711175937_Final")]
+    [Migration("20230711214220_Final")]
     partial class Final
     {
         /// <inheritdoc />
@@ -322,7 +322,7 @@ namespace Projeto.Migrations
                             Id = 1,
                             Custo = 10,
                             Description = "Mais 1 click por click :)",
-                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +1.png",
+                            Imagem = "item1.png",
                             Name = "+1"
                         },
                         new
@@ -330,7 +330,7 @@ namespace Projeto.Migrations
                             Id = 2,
                             Custo = 690,
                             Description = "Boa",
-                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item +69.png",
+                            Imagem = "item69.png",
                             Name = "+69"
                         },
                         new
@@ -338,7 +338,7 @@ namespace Projeto.Migrations
                             Id = 3,
                             Custo = 5000,
                             Description = "MULTIPLOS CLICKS",
-                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x5.png",
+                            Imagem = "itemx5.png",
                             Name = "x5"
                         },
                         new
@@ -346,7 +346,7 @@ namespace Projeto.Migrations
                             Id = 4,
                             Custo = 100000,
                             Description = "tantos clicks",
-                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\Item x100.png",
+                            Imagem = "itemx100.png",
                             Name = "x100"
                         },
                         new
@@ -354,7 +354,7 @@ namespace Projeto.Migrations
                             Id = 5,
                             Custo = 1001,
                             Description = "Definitivamente não é um botão",
-                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\not a button.png",
+                            Imagem = "not_a_button.png",
                             Name = "Não é um botão"
                         },
                         new
@@ -362,7 +362,7 @@ namespace Projeto.Migrations
                             Id = 6,
                             Custo = 2512,
                             Description = "HO HO HO",
-                            Imagem = "C:\\Users\\marti\\Desktop\\DW\\Projeto\\Projeto\\Projeto\\wwwroot\\imagens\\christmas hat.png",
+                            Imagem = "christmas_hat.png",
                             Name = "Gorro de natal"
                         });
                 });

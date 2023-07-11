@@ -42,7 +42,7 @@ namespace Projeto.Controllers {
         // GET: Mensagems/Create
         public IActionResult Create() {
             ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name");
-            ViewData["JogadorFK"] = new SelectList(_context.Users, "Id", "UserName");
+            ViewData["JogadorFK"] = new SelectList(_context.Jogador, "Id", "Nome");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace Projeto.Controllers {
                     return RedirectToAction(nameof(Index));
             }
             ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", mensagem.GrupoFK);
-            ViewData["JogadorFK"] = new SelectList(_context.Users, "Id", "UserName", mensagem.JogadorFK);
+            ViewData["JogadorFK"] = new SelectList(_context.Jogador, "Id", "Nome", mensagem.JogadorFK);
             return View(mensagem);
         }
     
@@ -86,7 +86,7 @@ namespace Projeto.Controllers {
                 return NotFound();
             }
             ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", mensagem.GrupoFK);
-            ViewData["JogadorFK"] = new SelectList(_context.Users, "Id", "UserName", mensagem.JogadorFK);
+            ViewData["JogadorFK"] = new SelectList(_context.Jogador, "Id", "Nome", mensagem.JogadorFK);
             return View(mensagem);
         }
 
@@ -124,7 +124,7 @@ namespace Projeto.Controllers {
                 return RedirectToAction(nameof(Index));
             }
             ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", mensagem.GrupoFK);
-            ViewData["JogadorFK"] = new SelectList(_context.Users, "Id", "UserName", mensagem.JogadorFK);
+            ViewData["JogadorFK"] = new SelectList(_context.Jogador, "Id", "Nome", mensagem.JogadorFK);
             return View(mensagem);
         }
 
