@@ -12,7 +12,7 @@ using Projeto.Data;
 namespace Projeto.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230710175814_Final")]
+    [Migration("20230711092249_Final")]
     partial class Final
     {
         /// <inheritdoc />
@@ -395,7 +395,6 @@ namespace Projeto.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

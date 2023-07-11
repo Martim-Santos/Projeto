@@ -49,7 +49,7 @@ namespace Projeto.Models {
         /// chave de ligação entre a base de dados da autenticação
         /// e a base de dados do 'jogo'
         /// </summary>
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
         // *************************************************************
 

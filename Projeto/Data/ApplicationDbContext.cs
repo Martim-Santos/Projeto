@@ -49,15 +49,6 @@ namespace Projeto.Data {
                     Id = 4, Name = "Sem nome", Description = "Não temos nome"
                 });
 
-            /*builder.Entity<Jogador>().HasData(
-            new Jogador{
-                    Id = 1, Nome = "anonimo", Email = "martim-santos@hotmail.com", Click = 1, Score = 0
-            });
-
-            builder.Entity<IdentityUser>().HasData(
-            new IdentityUser {
-                Id = "1", UserName = "anonimo", Email = "martim-santos@hotmail.com", PasswordHash = "anonimo"
-            });*/
         }
 
         public DbSet<Jogador> Jogador { get; set; }
