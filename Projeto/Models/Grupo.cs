@@ -16,7 +16,7 @@
         public string Name { get; set; }
 
         /// <summary>
-        /// nome do criador
+        /// descrição do grupo
         /// </summary>
         public string Description { get; set; }
 

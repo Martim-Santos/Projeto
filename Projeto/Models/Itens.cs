@@ -23,7 +23,7 @@
         public string Imagem { get; set; }
 
         /// <summary>
-        /// tipo de item
+        /// custo do item
         /// </summary>
         public int Custo { get; set; }
 

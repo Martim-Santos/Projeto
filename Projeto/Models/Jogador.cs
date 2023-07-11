@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace Projeto.Models {
     public class Jogador {
@@ -39,7 +40,7 @@ namespace Projeto.Models {
         public int Click { get; set; }
 
         /// <summary>
-        /// pontuação do jogador (quantas vezes o jogador clicou)
+        /// pontuação do jogador
         /// </summary>
         public int Score { get; set; }
 

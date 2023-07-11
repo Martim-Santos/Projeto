@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Projeto.Areas.Identity.Pages.Account;
 using Projeto.Data;
 using Projeto.Models;
 
 namespace Projeto.Controllers {
 
     [ApiController]
-    [Route("api/itens")]
+    [Route("api/[controller]")]
     public class ItensController : ControllerBase {
 
         private readonly ApplicationDbContext _context;
@@ -18,56 +20,53 @@ namespace Projeto.Controllers {
             _context = context;
             _signInManager = signInManager;
             _userManager = userManager;
+
         }
 
+        // devolve a lista de itens
         [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetAsync(IdentityUser j) {
-            _ = await _userManager.FindByEmailAsync("email");
+        public async Task<ActionResult<List<Itens>>> Get() {
 
-            if (j != null) {
-                PasswordVerificationResult res = new PasswordHasher<IdentityUser>().VerifyHashedPassword(null, j.PasswordHash, "password");
-                if (res.Equals(PasswordVerificationResult.Success)) {
-                    await _signInManager.SignInAsync(j, false);
-                }
-            }
+            return Ok(await _context.Itens.ToListAsync());
+        }
 
-            var item = _context.Itens.ToList();
+        // devolve o item com esse Id
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Itens>> Get(int id) {
+
+            var item = await _context.Itens.FindAsync(id);
+
+            if(item == null) return BadRequest("Item not found :(");
+
+            return Ok(await _context.Itens.FindAsync(id));
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<List<Itens>>> UpdateItem(Itens request) {
+
+            var item = await _context.Itens.FindAsync(request.Id);
+            if (item == null) return BadRequest("Item not found :(");
+
+            item.Custo = 0;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Itens.ToListAsync());
+        }
+
+        // devolve a lista de itens do jogador
+        [HttpGet("User/{id}")]
+        public async Task<ActionResult<List<Itens>>> GetUserItens(int Id) {
+
+            var user = await _context.Jogador.FindAsync(Id);
+
+            if (user == null) return BadRequest("user not found :(");
+
+            var item = user.ListaItens;
 
             return Ok(item);
         }
 
     }
 
-    /*[ApiController]
-    [Route("api/Grupo")]
-    public class GrupoController : ControllerBase {
-
-        private readonly ApplicationDbContext _context;
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
-
-        public GrupoController(ApplicationDbContext context, SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager) {
-            _context = context;
-            _signInManager = signInManager;
-            _userManager = userManager;
-        }
-
-        [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetAsync(IdentityUser j) {
-            _ = await _userManager.FindByEmailAsync("email");
-
-            if (j != null) {
-                PasswordVerificationResult res = new PasswordHasher<IdentityUser>().VerifyHashedPassword(null, j.PasswordHash, "password");
-                if (res.Equals(PasswordVerificationResult.Success)) {
-                    await _signInManager.SignInAsync(j, false);
-                }
-            }
-
-            var Grupo = _context.Itens.ToList();
-
-            return Ok(Grupo);
-        }
-    }*/
 }

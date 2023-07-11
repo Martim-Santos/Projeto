@@ -14,6 +14,13 @@ namespace Projeto.Controllers {
             _context = context;
         }
 
+        public async Task AumentaPAsync() {
+            var j = await _context.Jogador.FindAsync();
+            if(j != null) {
+                j.Score += j.Click;
+            }
+        }
+
         // GET: Jogadors
         public async Task<IActionResult> Index()
         {
@@ -21,7 +28,7 @@ namespace Projeto.Controllers {
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Jogadors/Details/5
+        // GET: Jogadors/Details/1
         public async Task<IActionResult> Details(int? Id)
         {
             if (Id == null || _context.Jogador == null)
@@ -40,31 +47,7 @@ namespace Projeto.Controllers {
             return View(jogador);
         }
 
-        // GET: Jogadors/Create
-        /*public IActionResult Create()
-        {
-            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name");
-            return View();
-        }
-
-        // POST: Jogadors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Password,Click,Score,GrupoFK")] Jogador jogador)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(jogador);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["GrupoFK"] = new SelectList(_context.Grupo, "Id", "Name", jogador.GrupoFK);
-            return View(jogador);
-        }*/
-
-        // GET: Jogadors/Edit/5
+        // GET: Jogadors/Edit/1
         public async Task<IActionResult> Edit(int? Id)
         {
             if (Id == null || _context.Jogador == null)
@@ -81,7 +64,7 @@ namespace Projeto.Controllers {
             return View(jogador);
         }
 
-        // POST: Jogadors/Edit/0
+        // POST: Jogadors/Edit/1
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -117,7 +100,7 @@ namespace Projeto.Controllers {
             return View(jogador);
         }
 
-        // GET: Jogadors/Delete/5
+        // GET: Jogadors/Delete/1
         public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || _context.Jogador == null)
@@ -136,7 +119,7 @@ namespace Projeto.Controllers {
             return View(jogador);
         }
 
-        // POST: Jogadors/Delete/5
+        // POST: Jogadors/Delete/1
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int Id)

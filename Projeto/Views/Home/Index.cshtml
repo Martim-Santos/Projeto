@@ -1,8 +1,22 @@
-﻿@{
+﻿@using Projeto.Models
+
+@{
     ViewData["Title"] = "Botão";
+
 }
+
+<script>
+
+    var j = new Jogador();
+
+    function AumentaP(){
+        j.Score += j.Click;
+    }
+
+
+</script>
 
 <div class="text-center">
     <h1 class="display-4">Clique</h1>
-    <p><img src="~/imagens/red.png" width="1000" /></p>
+    <img src="~/imagens/red.png" width="1000" onclick="" />
 </div>
